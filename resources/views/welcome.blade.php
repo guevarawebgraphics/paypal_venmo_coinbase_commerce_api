@@ -32,7 +32,7 @@
 
         <section id="main">
                     <div class="container" style="margin-top: 2em;">
-                    <h3 class="display-3">Checkout Page</h3>
+                    <h3 >Checkout Page</h3>
                         <div class="row">
                             <div class="col-md-8">
                                 @forelse($products as $field)
@@ -45,7 +45,7 @@
                                 </div>
                                 
                                 @empty  
-
+                                <em>No Product Found..</em>
                                 @endforelse
                                 
                             </div>
@@ -68,7 +68,7 @@
                                             </div>
                                             </div>  
                                         @empty  
-                                            <em>No Product Found..</em>
+                                           
                                         @endforelse
                                         <center><small><em>Powered By <img src="{{url('public/images/Consumer_Wordmark.png')}}" style="height: 12px; width: auto;"> </em></small></center>
 
@@ -144,9 +144,9 @@
                         });
 
                     </script>
- </section>
+        </section>
 
-            @include('layouts.footer')
+        @include('layouts.footer')
 
 
     </body>
