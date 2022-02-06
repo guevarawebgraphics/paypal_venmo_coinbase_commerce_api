@@ -7,13 +7,13 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="//fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <script src="//code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-        <link href="//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="//www.paypal.com/sdk/js?client-id={{env('APP_CLIENT_ID')}}&enable-funding=venmo&currency=USD&components=messages,buttons" data-sdk-integration-source="button-factory"></script>
+        <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{env('APP_CLIENT_ID')}}&enable-funding=venmo&currency=USD&components=messages,buttons" data-sdk-integration-source="button-factory"></script>
         <style>
             .products{
                 margin-top: 2em;
@@ -60,10 +60,10 @@
                                             <div class="productBtn" style="{{$loop->first ? 'display:block;' : 'display:none;' }}" id="productBtn{{$field->id}}" data-id="{{$field->id}}">
                                             <div>
                                                 <a style="width: 100%; max-width: 416px; height: 45px;" class="btn btn-ligh buy-with-crypto"
-                                                    href="//commerce.coinbase.com/checkout/{{$field->checkout_id}}">
+                                                    href="https://commerce.coinbase.com/checkout/{{$field->checkout_id}}">
                                                     Buy with Crypto 
                                                 </a>
-                                                <script src="//commerce.coinbase.com/v1/checkout.js?version=201807">
+                                                <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
                                                 </script>
                                             </div>
                                             </div>  
