@@ -32,7 +32,7 @@
 
         <section id="main">
                     <div class="container" style="margin-top: 2em;">
-                    <h1 class="display-3">Checkout Page</h1>
+                    <h3 class="display-3">Checkout Page</h3>
                         <div class="row">
                             <div class="col-md-8">
                                 @forelse($products as $field)
