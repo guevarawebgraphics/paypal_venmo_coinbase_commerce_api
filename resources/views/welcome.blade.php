@@ -64,7 +64,7 @@
                                     </div>
                                     </div>  
                                 @empty  
-
+                                    <em>No Product Found..</em>
                                 @endforelse
 
                         </div>
