@@ -66,6 +66,7 @@
                                 @empty  
                                     <em>No Product Found..</em>
                                 @endforelse
+                                <center><small><em>Powered By <img src="{{url('public/images/Consumer_Wordmark.png')}}" style="height: 12px; width: auto;"> </em></small></center>
 
                         </div>
 
