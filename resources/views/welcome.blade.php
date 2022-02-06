@@ -18,6 +18,11 @@
             .products{
                 margin-top: 2em;
             }
+            footer{
+position: fixed;
+width: 100%;
+bottom: 0;
+}
         </style>
           <script src="{{ asset('public/js/swal.js') }}"></script>
         
@@ -27,120 +32,121 @@
     
         @include('layouts.header')
 
-            <div class="container" style="margin-top: 2em;">
-            <h1 class="display-3">Checkout Page</h1>
-                <div class="row">
-                    <div class="col-md-8">
-                        @forelse($products as $field)
-                        <div class="card container products">
-                            <div class="card-body">
-                                <input type="radio" name="product_id" id="product_id" data-price="{{$field->price}}" value="{{$field->id}}" {{$loop->first ? 'checked' : ''}}>
-                                <h5>{{$field->name}} - $ {{number_format($field->price,2)}}</h5>
-                                <p>{{$field->description}}</p>
-                            </div>
-                        </div>
-                        
-                        @empty  
-
-                        @endforelse
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div id="smart-button-container" style="margin-top: 5em;">
-                            <div >
-                                <div id="paypal-button-container"></div>
-                            </div>
-                        </div>
-                                
+        <section>
+                    <div class="container" style="margin-top: 2em;">
+                    <h1 class="display-3">Checkout Page</h1>
+                        <div class="row">
+                            <div class="col-md-8">
                                 @forelse($products as $field)
-                                    <div class="productBtn" style="{{$loop->first ? 'display:block;' : 'display:none;' }}" id="productBtn{{$field->id}}" data-id="{{$field->id}}">
-                                    <div>
-                                        <a style="width: 100%; max-width: 416px; height: 45px;" class="btn btn-ligh buy-with-crypto"
-                                            href="https://commerce.coinbase.com/checkout/{{$field->checkout_id}}">
-                                            Buy with Crypto 
-                                        </a>
-                                        <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
-                                        </script>
+                                <div class="card container products">
+                                    <div class="card-body">
+                                        <input type="radio" name="product_id" id="product_id" data-price="{{$field->price}}" value="{{$field->id}}" {{$loop->first ? 'checked' : ''}}>
+                                        <h5>{{$field->name}} - $ {{number_format($field->price,2)}}</h5>
+                                        <p>{{$field->description}}</p>
                                     </div>
-                                    </div>  
+                                </div>
+                                
                                 @empty  
-                                    <em>No Product Found..</em>
+
                                 @endforelse
-                                <center><small><em>Powered By <img src="{{url('public/images/Consumer_Wordmark.png')}}" style="height: 12px; width: auto;"> </em></small></center>
+                                
+                            </div>
+                            <div class="col-md-4">
+                                <div id="smart-button-container" style="margin-top: 5em;">
+                                    <div >
+                                        <div id="paypal-button-container"></div>
+                                    </div>
+                                </div>
+                                        
+                                        @forelse($products as $field)
+                                            <div class="productBtn" style="{{$loop->first ? 'display:block;' : 'display:none;' }}" id="productBtn{{$field->id}}" data-id="{{$field->id}}">
+                                            <div>
+                                                <a style="width: 100%; max-width: 416px; height: 45px;" class="btn btn-ligh buy-with-crypto"
+                                                    href="https://commerce.coinbase.com/checkout/{{$field->checkout_id}}">
+                                                    Buy with Crypto 
+                                                </a>
+                                                <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
+                                                </script>
+                                            </div>
+                                            </div>  
+                                        @empty  
+                                            <em>No Product Found..</em>
+                                        @endforelse
+                                        <center><small><em>Powered By <img src="{{url('public/images/Consumer_Wordmark.png')}}" style="height: 12px; width: auto;"> </em></small></center>
 
+                                </div>
+
+                            </div>
                         </div>
-
                     </div>
-                </div>
-            </div>
 
-           <script>
-               
-        function initPayPalButton() {
-            paypal.Buttons({
+                <script>
+                    
+                function initPayPalButton() {
+                    paypal.Buttons({
 
-                style: {
-                    shape: 'rect',
-                    color: 'gold',
-                    layout: 'vertical',
-                    label: 'paypal',
+                        style: {
+                            shape: 'rect',
+                            color: 'gold',
+                            layout: 'vertical',
+                            label: 'paypal',
 
-                },
+                        },
 
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [
-                            {
-                                "amount":
+                        createOrder: function(data, actions) {
+                            return actions.order.create({
+                                purchase_units: [
                                     {
-                                        "currency_code":"USD",
-                                        "value":$("input[name='product_id']:checked").attr('data-price')
-                                    }
-                            }]
-                    });
-                },
+                                        "amount":
+                                            {
+                                                "currency_code":"USD",
+                                                "value":$("input[name='product_id']:checked").attr('data-price')
+                                            }
+                                    }]
+                            });
+                        },
 
-                onApprove: function(data, actions) {
-                    
-                    return actions.order.capture().then(function(orderData) {
-                        
-                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                        onApprove: function(data, actions) {
+                            
+                            return actions.order.capture().then(function(orderData) {
+                                
+                                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
 
-                        const element = document.getElementById('paypal-button-container');
-                        
-                        element.innerHTML = '';
+                                const element = document.getElementById('paypal-button-container');
+                                
+                                element.innerHTML = '';
 
-                        element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                    
-                    });
+                                element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                            
+                            });
 
-                },
+                        },
 
-                onError: function(err) {
-                    console.log(err);
-                }
+                        onError: function(err) {
+                            console.log(err);
+                        }
 
-                }).render('#paypal-button-container');
-            }
+                        }).render('#paypal-button-container');
+                    }
 
-            initPayPalButton();
-
-
-           </script>
-           
+                    initPayPalButton();
 
 
-            <script>
+                </script>
+                
 
-                $('input:radio').change(function() {
-                    var id = $(this).val();
-                    $(".productBtn").hide();
 
-                    $("#productBtn"+id).show();
-                });
+                    <script>
 
-            </script>
+                        $('input:radio').change(function() {
+                            var id = $(this).val();
+                            $(".productBtn").hide();
 
+                            $("#productBtn"+id).show();
+                        });
+
+                    </script>
+ </section>
 
             @include('layouts.footer')
 

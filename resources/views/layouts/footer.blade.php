@@ -1,7 +1,7 @@
 
                     
                 <!-- Footer -->
-                <footer class="bg-dark text-center text-white " style="margin-top: 10em; ">
+                <footer class="bg-dark text-center text-white " style="margin-top: 5em;">
                 <!-- Grid container -->
                 <div class="container p-4">
                 

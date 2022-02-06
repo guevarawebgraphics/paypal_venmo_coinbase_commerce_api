@@ -21,6 +21,10 @@
             .products{
                 margin-top: 2em;
             }
+            body
+            {   
+                padding-bottom:0;   
+            }
         </style>
     
 
@@ -33,110 +37,110 @@
 
         @include('layouts.header')
 
+        <section>
+                <div class="container" style="margin-top: 5em;">
 
-        <div class="container" style="margin-top: 5em;">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
 
-<div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Products</h1>
+                <p class="col-md-8 ">Note: This product list is connected to your coinbase commerce account. If you create new product, automatically it will directly stores to your configured coinbase commerce account.</p>
+                
+            <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark btnAdd text-white">
+        Add New Product
+        </button>
+            </div>
+        </div>
 
-    <h1 class="display-5 fw-bold">Products</h1>
-        <p class="col-md-8 ">Note: This product list is connected to your coinbase commerce account. If you create new product, automatically it will directly stores to your configured coinbase commerce account.</p>
-        
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-dark btnAdd text-white">
-  Add New Product
-</button>
-    </div>
-</div>
-
-<div class="h-100 p-5  border rounded-3">
+    <div class="h-100 p-5  border rounded-3">
 
 
-<table id="product-table" class="table ">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Currency</th>
-                        <th>Checkout ID</th>
-                        <th>Action</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    @forelse( $products as $field )
-                        @php 
-                            $data = array([
-                                'name'  =>  $field->name,  
-                                'description'  =>  $field->description, 
-                                'price'  =>  $field->price
-                            ]);
-                        @endphp
-                        <tr> 
-                            <td>{{$field->id}}</td>
-                            <td>{{$field->name}}</td>
-                            <td>{{$field->description}}</td>
-                            <td>{{number_format($field->price,2)}}</td>
-                            <td>{{$field->currency}}</td>
-                            <td>{{$field->checkout_id}}</td>
-                            <td>
-                                <button class="btn btn-success text-white btnUpdate" data-id="{{$field->id}}" data-data="{{json_encode($data[0])}}"><i class="fa fa-pencil"></i></button>
-                                <button class="btn btn-danger text-white btnDelete" data-id="{{$field->id}}" data-data="{{json_encode($data[0])}}"><i class="fa fa-trash"></i></button>
-                            </td>
+    <table id="product-table" class="table ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Currency</th>
+                            <th>Checkout ID</th>
+                            <th>Action</th>
                         </tr>
-                    @empty 
 
-                    @endforelse 
-                </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                        @forelse( $products as $field )
+                            @php 
+                                $data = array([
+                                    'name'  =>  $field->name,  
+                                    'description'  =>  $field->description, 
+                                    'price'  =>  $field->price
+                                ]);
+                            @endphp
+                            <tr> 
+                                <td>{{$field->id}}</td>
+                                <td>{{$field->name}}</td>
+                                <td>{{$field->description}}</td>
+                                <td>{{number_format($field->price,2)}}</td>
+                                <td>{{$field->currency}}</td>
+                                <td>{{$field->checkout_id}}</td>
+                                <td>
+                                    <button class="btn btn-success text-white btnUpdate" data-id="{{$field->id}}" data-data="{{json_encode($data[0])}}"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger text-white btnDelete" data-id="{{$field->id}}" data-data="{{json_encode($data[0])}}"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        @empty 
+
+                        @endforelse 
+                    </tbody>
+            </table>
 
 
-</div>
-</div>
+    </div>
+    </div>
 
     
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-            <input type="hidden" name="update_product_id" value="" id="update_product_id">
-           <div class="form-group">
-                <label for="product_name">Name</label>
-                <input type="text" class="form-control" id="product_name">
-              
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                <input type="hidden" name="update_product_id" value="" id="update_product_id">
             <div class="form-group">
-                <label for="product_desc">Description</label>
-                <textarea class="form-control" name="product_desc" id="product_desc"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="currency">
-                    Currency
-                </label>
-                <input type="text" class="form-control" value="USD" name="currency" id="currency" readonly>
-              
-            </div>
-            <div class="form-group">
-                <label for="product_price">Price</label>
-                <input type="text" class="form-control decimal" name="product_price" id="product_price" value="" placeholder="$1.00">
-            </div>
-            
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-dark text-white btn-save-coinbase">Save changes</button>
-        <button type="button" class="btn btn-dark text-white btn-update-coinbase" style="display:none;">Update changes</button>
-      </div>
+                    <label for="product_name">Name</label>
+                    <input type="text" class="form-control" id="product_name">
+                
+                </div>
+                <div class="form-group">
+                    <label for="product_desc">Description</label>
+                    <textarea class="form-control" name="product_desc" id="product_desc"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="currency">
+                        Currency
+                    </label>
+                    <input type="text" class="form-control" value="USD" name="currency" id="currency" readonly>
+                
+                </div>
+                <div class="form-group">
+                    <label for="product_price">Price</label>
+                    <input type="text" class="form-control decimal" name="product_price" id="product_price" value="" placeholder="$1.00">
+                </div>
+                
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-dark text-white btn-save-coinbase">Save changes</button>
+            <button type="button" class="btn btn-dark text-white btn-update-coinbase" style="display:none;">Update changes</button>
+        </div>
+        </div>
     </div>
-  </div>
-</div>
+    </div>
 
 
 
@@ -346,9 +350,8 @@
         });
 
         </script>
-
-            
-
+    
+        </section>
         @include('layouts.footer')
     </body>
 </html>
