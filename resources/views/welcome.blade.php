@@ -18,21 +18,19 @@
             .products{
                 margin-top: 2em;
             }
-            footer{
-position: fixed;
-width: 100%;
-bottom: 0;
-}
+            #main {
+                height:100vh;
+            }
         </style>
           <script src="{{ asset('public/js/swal.js') }}"></script>
         
     </head>
-    <body style="height: auto;">
+    <body >
   
     
         @include('layouts.header')
 
-        <section>
+        <section id="main">
                     <div class="container" style="margin-top: 2em;">
                     <h1 class="display-3">Checkout Page</h1>
                         <div class="row">

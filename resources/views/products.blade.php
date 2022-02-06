@@ -21,9 +21,8 @@
             .products{
                 margin-top: 2em;
             }
-            body
-            {   
-                padding-bottom:0;   
+            #main {
+                height:100vh;
             }
         </style>
     
@@ -33,11 +32,11 @@
     </head>
 
 
-        <body>
+        <body >
 
         @include('layouts.header')
 
-        <section>
+        <section id="main">
                 <div class="container" style="margin-top: 5em;">
 
         <div class="p-5 mb-4 bg-light rounded-3">
